@@ -12,9 +12,15 @@ const FileDataSource = require('./FileDataSource');
  */
 class JsonDataSource extends FileDataSource {
 
+  hasData(config = {}) {
+    const filepath = this.resolvePath(config);
+    return fs.existsSync(filepath);
+  }
+
   fetchAll(config = {}) {
     const filepath = this.resolvePath(config);
-    if (!fs.existsSync(filepath)) {
+
+    if (!this.hasData(config)) {
       throw new Error(`Invalid path [${filepath}] for JsonDataSource`);
     }
 

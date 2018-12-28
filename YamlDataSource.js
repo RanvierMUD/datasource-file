@@ -13,11 +13,18 @@ const FileDataSource = require('./FileDataSource');
  */
 class YamlDataSource extends FileDataSource {
 
+  hasData(config = {}) {
+    const filepath = this.resolvePath(config);
+    return fs.existsSync(filepath);
+  }
+
   fetchAll(config = {}) {
     const filepath = this.resolvePath(config);
-    if (!fs.existsSync(filepath)) {
+
+    if (!this.hasData(config)) {
       throw new Error(`Invalid path [${filepath}] for YamlDataSource`);
     }
+
 
     return new Promise((resolve, reject) => {
       const contents = fs.readFileSync(fs.realpathSync(filepath)).toString('utf8');

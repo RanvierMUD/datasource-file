@@ -22,9 +22,16 @@ const JsonDataSource = require('./JsonDataSource');
  * @extends DataSource
  */
 class JsonDirectoryDataSource extends FileDataSource {
+
+  hasData(config = {}) {
+    const filepath = this.resolvePath(config);
+    return fs.existsSync(filepath);
+  }
+
   fetchAll(config = {}) {
     const dirPath = this.resolvePath(config);
-    if (!fs.existsSync(dirPath)) {
+
+    if (!this.hasData(config)) {
       throw new Error(`Invalid path [${dirPath}] specified for JsonDirectoryDataSource`);
     }
 

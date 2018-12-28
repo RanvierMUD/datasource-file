@@ -21,9 +21,15 @@ const YamlDataSource = require('./YamlDataSource');
  *
  */
 class YamlAreaDataSource extends FileDataSource {
+  hasData(config = {}) {
+    const dirPath = this.resolvePath(config);
+    return fs.existsSync(dirPath);
+  }
+
   async fetchAll(config = {}) {
     const dirPath = this.resolvePath(config);
-    if (!fs.existsSync(dirPath)) {
+
+    if (!this.hasData(config)) {
       throw new Error(`Invalid path [${dirPath}] specified for YamlAreaDataSource`);
     }
 
