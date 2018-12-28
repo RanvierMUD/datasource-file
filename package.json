@@ -1,0 +1,20 @@
+{
+  "name": "ranvier-datasource-file",
+  "description": "DataSources for the Ranvier game engine for file-based storage",
+  "main": "index.js",
+  "dependencies": {
+    "js-yaml": "^3.12.0"
+  },
+  "version": "1.0.0",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RanvierMUD/datasource-file.git"
+  },
+  "author": "Shawn Biddle <shawncplus@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RanvierMUD/datasource-file/issues"
+  },
+  "homepage": "https://github.com/RanvierMUD/datasource-file#readme"
+}
