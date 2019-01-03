@@ -24,7 +24,7 @@ class YamlDirectoryDataSource extends FileDataSource {
 
   hasData(config = {}) {
     const filepath = this.resolvePath(config);
-    return fs.existsSync(filepath);
+    return Promise.resolve(fs.existsSync(filepath));
   }
 
   async fetchAll(config = {}) {
