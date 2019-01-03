@@ -16,6 +16,11 @@ class FileDataSource {
    */
   resolvePath(config) {
     const { path, bundle, area } = config;
+
+    if (!this.root) {
+      throw new Error('No root configured for DataSource');
+    }
+
     if (!path) {
       throw new Error('No path for DataSource');
     }
@@ -28,7 +33,7 @@ class FileDataSource {
       throw new Error('No bundle configured for path with [BUNDLE]');
     }
 
-    return (this.root || '') + '/' + path
+    return this.root + '/' + path
       .replace('[AREA]', area)
       .replace('[BUNDLE]', bundle)
     ;
