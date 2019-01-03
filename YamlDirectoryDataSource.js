@@ -28,7 +28,7 @@ class YamlDirectoryDataSource extends FileDataSource {
   }
 
   async fetchAll(config = {}) {
-    const dirPath = this.resolvePath(config.path);
+    const dirPath = this.resolvePath(config);
 
     if (!this.hasData(config)) {
       throw new Error(`Invalid path [${dirPath}] specified for YamlDirectoryDataSource`);
@@ -53,7 +53,7 @@ class YamlDirectoryDataSource extends FileDataSource {
   }
 
   async fetch(config = {}, id) {
-    const dirPath = this.resolvePath(config.path);
+    const dirPath = this.resolvePath(config);
     if (!fs.existsSync(dirPath)) {
       throw new Error(`Invalid path [${dirPath}] specified for YamlDirectoryDataSource`);
     }
@@ -64,7 +64,7 @@ class YamlDirectoryDataSource extends FileDataSource {
   }
 
   async update(config = {}, id, data) {
-    const dirPath = this.resolvePath(config.path);
+    const dirPath = this.resolvePath(config);
     if (!fs.existsSync(dirPath)) {
       throw new Error(`Invalid path [${dirPath}] specified for YamlDirectoryDataSource`);
     }
