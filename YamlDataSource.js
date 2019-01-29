@@ -62,11 +62,13 @@ class YamlDataSource extends FileDataSource {
   async update(config = {}, id, data) {
     const currentData = await this.fetchAll(config);
 
-    if (Array.isArray(currentData)) {
-      throw new TypeError('Yaml data stored as array, cannot update by id');
+    const fetchIndex = currentData.findIndex(item => item.id === id);
+
+    if(fetchIndex === -1) {
+      throw new ReferenceError(`Record with id [${id}] not found.`);
     }
 
-    currentData[id] = data;
+    currentData[fetchIndex] = data;
 
     return this.replace(config, currentData);
   }
