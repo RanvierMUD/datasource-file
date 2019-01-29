@@ -65,7 +65,7 @@ class YamlDataSource extends FileDataSource {
     const fetchIndex = currentData.findIndex(item => item.id === id);
 
     if(fetchIndex === -1) {
-      throw new ReferenceError(`Record with id [${id}] not found.`);
+      throw new ReferenceError(`Record with id [${id}] not found, no changes were made.`);
     }
 
     currentData[fetchIndex] = data;
