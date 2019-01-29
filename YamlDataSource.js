@@ -37,12 +37,14 @@ class YamlDataSource extends FileDataSource {
   async fetch(config = {}, id) {
     const data = await this.fetchAll(config);
 
-    if (!data.hasOwnProperty(id)) {
+    const fetchSingleItem = data.find(item => item.id === id);
+
+    if (!fetchSingleItem) {
       throw new ReferenceError(`Record with id [${id}] not found.`);
     }
 
-    return data[id];
-  }
+    return fetchSingleItem;
+}
 
   replace(config = {}, data) {
     const filepath = this.resolvePath(config);
