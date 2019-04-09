@@ -33,7 +33,7 @@ class FileDataSource {
       throw new Error('No bundle configured for path with [BUNDLE]');
     }
 
-    return this.root + '/' + path
+    return require('path').join(this.root, path)
       .replace('[AREA]', area)
       .replace('[BUNDLE]', bundle)
     ;
