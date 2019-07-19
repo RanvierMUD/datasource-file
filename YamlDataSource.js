@@ -37,12 +37,14 @@ class YamlDataSource extends FileDataSource {
   async fetch(config = {}, id) {
     const data = await this.fetchAll(config);
 
-    if (!data.hasOwnProperty(id)) {
+    const fetchSingleItem = data.find(item => item.id === id);
+
+    if (!fetchSingleItem) {
       throw new ReferenceError(`Record with id [${id}] not found.`);
     }
 
-    return data[id];
-  }
+    return fetchSingleItem;
+}
 
   replace(config = {}, data) {
     const filepath = this.resolvePath(config);
@@ -60,11 +62,13 @@ class YamlDataSource extends FileDataSource {
   async update(config = {}, id, data) {
     const currentData = await this.fetchAll(config);
 
-    if (Array.isArray(currentData)) {
-      throw new TypeError('Yaml data stored as array, cannot update by id');
+    const fetchIndex = currentData.findIndex(item => item.id === id);
+
+    if(fetchIndex === -1) {
+      throw new ReferenceError(`Record with id [${id}] not found, no changes were made.`);
     }
 
-    currentData[id] = data;
+    currentData[fetchIndex] = data;
 
     return this.replace(config, currentData);
   }
