@@ -19,7 +19,7 @@ const JsonDataSource = require('./JsonDataSource');
  * Config:
  *   path: string: relative path to directory containing .json files from project root
  *
- * @extends DataSource
+ * @extends FileDataSource
  */
 class JsonDirectoryDataSource extends FileDataSource {
 
